@@ -14,8 +14,23 @@ jobs:
     steps:
     - name: Checkout Plugin Hub
       uses: actions/checkout@v4
+      with:
+        # PR merge commit plus its two parents: the base tip and the PR head, which is what the commit check diffs.
+        fetch-depth: 2
     - uses: actions/setup-python@v4
       with:
         python-version: '3.11'
     - name: Validate
       run: 'python test.py Plugins/'
+    - name: Check that commits exist
+      if: github.event_name == 'pull_request'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        touched=$(git diff --name-only --diff-filter=AM "${{ github.event.pull_request.base.sha }}" "${{ github.sha }}" -- 'Plugins/**/*.xml' 'Plugins/*.xml')
+        if [ -z "$touched" ]; then echo "No plugin XML touched"; exit 0; fi
+        status=0
+        for f in $touched; do
+          python check_commits.py "$f" || status=1
+        done
+        exit $status
