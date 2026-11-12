@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<PluginData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="GitHubPlugin">
+    <Id>47499E78-8BA8-473C-A0AA-FDC065A3B0C1</Id>
+    <RepoId>Voxar-org/GrassDistanceFix</RepoId>
+    <FriendlyName>Grass Distance Fix</FriendlyName>
+    <Author>Voxar</Author>
+    <Tooltip>Keeps vanilla grass blades the same physical size at any distance.</Tooltip>
+    <Description>Removes distance-based grass scaling while keeping the vanilla draw cutoff and LOD blade selection. Grass fades through dithered pixel coverage at full blade size. The plugin settings let you toggle the fix, the draw-limit fade, and the LOD fade. This applies to the vanilla foliage renderer. Foliage Rewrite uses its own shader when enabled.</Description>
+    <Commit>0ee728a625be3d4d8604ce6120a792871de5ffd7</Commit>
+</PluginData>
